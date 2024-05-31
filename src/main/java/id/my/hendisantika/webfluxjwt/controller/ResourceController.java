@@ -28,4 +28,10 @@ public class ResourceController {
     public Mono<ResponseEntity<Message>> user() {
         return Mono.just(ResponseEntity.ok(new Message("Content for user")));
     }
+
+    @GetMapping("/admin")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Mono<ResponseEntity<Message>> admin() {
+        return Mono.just(ResponseEntity.ok(new Message("Content for admin")));
+    }
 }
