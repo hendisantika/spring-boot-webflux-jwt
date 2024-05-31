@@ -1,7 +1,10 @@
 package id.my.hendisantika.webfluxjwt.security;
 
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.web.server.context.ServerSecurityContextRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,5 +23,10 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 
     public SecurityContextRepository(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
+    }
+
+    @Override
+    public Mono<Void> save(ServerWebExchange swe, SecurityContext sc) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
