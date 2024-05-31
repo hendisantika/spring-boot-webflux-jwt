@@ -1,5 +1,6 @@
 package id.my.hendisantika.webfluxjwt.security;
 
+import id.my.hendisantika.webfluxjwt.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by IntelliJ IDEA.
@@ -50,5 +53,11 @@ public class JWTUtil {
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
+    }
+
+    public String generateToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role", user.getRoles());
+        return doGenerateToken(claims, user.getUsername());
     }
 }
