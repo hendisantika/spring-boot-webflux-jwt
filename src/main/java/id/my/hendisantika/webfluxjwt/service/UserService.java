@@ -4,6 +4,7 @@ import id.my.hendisantika.webfluxjwt.model.Role;
 import id.my.hendisantika.webfluxjwt.model.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,5 +34,9 @@ public class UserService {
 
         //username:passwowd -> admin:admin
         data.put("admin", new User("admin", "dQNjUIMorJb8Ubj2+wVGYp6eAeYkdekqAcnYp+aRq5w=", true, List.of(Role.ROLE_ADMIN)));
+    }
+
+    public Mono<User> findByUsername(String username) {
+        return Mono.justOrEmpty(data.get(username));
     }
 }
