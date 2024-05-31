@@ -49,4 +49,9 @@ public class PBKDF2Encoder implements PasswordEncoder {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public boolean matches(CharSequence cs, String string) {
+        return encode(cs).equals(string);
+    }
 }
