@@ -1,5 +1,6 @@
 package id.my.hendisantika.webfluxjwt.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,5 +32,9 @@ public class JWTUtil {
     @PostConstruct
     public void init() {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    public Claims getAllClaimsFromToken(String token) {
+        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
     }
 }
