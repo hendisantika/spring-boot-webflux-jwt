@@ -75,4 +75,8 @@ public class JWTUtil {
                 .signWith(key)
                 .compact();
     }
+
+    public Boolean validateToken(String token) {
+        return !isTokenExpired(token);
+    }
 }
