@@ -1,5 +1,7 @@
 package id.my.hendisantika.webfluxjwt.security;
 
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -26,4 +28,8 @@ public class JWTUtil {
 
     private Key key;
 
+    @PostConstruct
+    public void init() {
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+    }
 }
